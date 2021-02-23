@@ -1,6 +1,0 @@
-framework module Pods_YPCoreKit {
-  umbrella header "Pods-YPCoreKit-umbrella.h"
-
-  export *
-  module * { export * }
-}

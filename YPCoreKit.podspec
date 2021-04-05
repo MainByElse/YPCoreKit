@@ -18,14 +18,13 @@ Pod::Spec.new do |spec|
   spec.name         = "YPCoreKit"
   spec.version      = "0.0.1"
   spec.summary      = "个人常用组件库"
-  spec.description  = <<-DESC
-                   DESC
-  spec.homepage     = "http://EXAMPLE/YPCoreKit"
+  spec.homepage     = "https://github.com/MainByElse/YPCoreKit"
   spec.license      = "MIT"
   spec.author       = { "MainByElse" => "zeroliyanpeng@163.com" }
   spec.platform     = :ios, "11.0"
-  spec.source       = { :git => "http://EXAMPLE/YPCoreKit.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/MainByElse/YPCoreKit", :tag => "#{spec.version}" }
   spec.requires_arc     = true
+  spec.pod_target_xcconfig  = { "APPLICATION_EXTENSION_API_ONLY" => "NO" }
   spec.frameworks       = "Foundation", "UIKit"
   spec.source_files     = "Sources"
 
@@ -37,8 +36,7 @@ Pod::Spec.new do |spec|
   # Components
   spec.subspec "Components" do |ss|
     ss.source_files = "Sources/Components"
-    ss.dependency "RMCoreKit/Core"
-
+    ss.dependency "YPCoreKit/Core"
   end
 
   # Extensions

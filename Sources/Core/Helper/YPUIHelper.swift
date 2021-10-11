@@ -65,7 +65,7 @@ extension YPUIHelper {
         return TARGET_OS_SIMULATOR > 0
     }()
     public static let systemVersion: Double = {
-        UIDevice.current.systemVersion.doubleValue
+        Double(UIDevice.current.systemVersion) ?? 0
     }()
     public static let isRegularScreen: Bool = {
         return (isIPad || (is67InchScreen || is65InchScreen || is61InchScreen || is55InchScreen))
@@ -201,6 +201,16 @@ extension YPUIHelper {
             "iPad11,7" : "iPad (Cellular)",
             "iPad13,1" : "iPad Air (4th generation)",
             "iPad13,2" : "iPad Air (4th generation)",
+            "iPad13,4" : "iPad Pro (11-inch) (3rd generation)",
+            "iPad13,5" : "iPad Pro (11-inch) (3rd generation)",
+            "iPad13,6" : "iPad Pro (11-inch) (3rd generation)",
+            "iPad13,7" : "iPad Pro (11-inch) (3rd generation)",
+            "iPad13,8" : "iPad Pro (12.9-inch) (5th generation)",
+            "iPad13,9" : "iPad Pro (12.9-inch) (5th generation)",
+            "iPad13,10" : "iPad Pro (12.9-inch) (5th generation)",
+            "iPad13,11" : "iPad Pro (12.9-inch) (5th generation)",
+            "iPad14,1" : "iPad mini (6th generation)",
+            "iPad14,2" : "iPad mini (6th generation)",
             
             "iPod1,1" : "iPod touch 1",
             "iPod2,1" : "iPod touch 2",
@@ -312,16 +322,16 @@ extension YPUIHelper {
     fileprivate static var inchScreen65 = -1
     public static let is65InchScreen: Bool = {
         if inchScreen65 < 0 {
-            inchScreen65 = (deviceSize.width == screenSizeFor65Inch.width && deviceSize.height == screenSizeFor65Inch.height && (deviceModel == "iPhone11,4" || deviceModel == "iPhone11,6" || deviceModel == "iPhone12,5")) ? 1 : 0
+            inchScreen65 = (deviceSize.width == screenSizeFor65Inch.width && deviceSize.height == screenSizeFor65Inch.height) ? 1 : 0
         }
         return inchScreen65 > 0
     }()
-    fileprivate static var inchScreen61AndiPhone12 = -1
-    public static let is61InchScreenAndiPhone12: Bool = {
-        if inchScreen61AndiPhone12 < 0 {
-            inchScreen61AndiPhone12 = (deviceSize.width == screenSizeFor61InchAndiPhone12.width && deviceSize.height == screenSizeFor61InchAndiPhone12.height && (deviceModel == "iPhone13,2" || deviceModel == "iPhone13,3")) ? 1 : 0
+    fileprivate static var inchScreen61AndiPhone12Later = -1
+    public static let is61InchScreenAndiPhone12Later: Bool = {
+        if inchScreen61AndiPhone12Later < 0 {
+            inchScreen61AndiPhone12Later = (deviceSize.width == screenSizeFor61InchAndiPhone12Later.width && deviceSize.height == screenSizeFor61InchAndiPhone12Later.height) ? 1 : 0
         }
-        return inchScreen61AndiPhone12 > 0
+        return inchScreen61AndiPhone12Later > 0
     }()
     fileprivate static var inchScreen61 = -1
     public static let is61InchScreen: Bool = {
@@ -378,7 +388,7 @@ extension YPUIHelper {
     // MARK: ****** Size ******
     public static let screenSizeFor67Inch: CGSize = CGSize(width: 428, height: 926)
     public static let screenSizeFor65Inch = CGSize(width: 414, height: 896)
-    public static let screenSizeFor61InchAndiPhone12 = CGSize(width: 390, height: 844)
+    public static let screenSizeFor61InchAndiPhone12Later = CGSize(width: 390, height: 844)
     public static let screenSizeFor61Inch = CGSize(width: 414, height: 896)
     public static let screenSizeFor58Inch = CGSize(width: 375, height: 812)
     public static let screenSizeFor55Inch = CGSize(width: 414, height: 736)
@@ -436,10 +446,10 @@ extension YPUIHelper {
         return pixelone
     }()
     public static let isLandscape: Bool = {
-        UIInterfaceOrientationIsLandscape(UIApplication.shared.statusBarOrientation)
+        UIApplication.shared.statusBarOrientation.isLandscape
     }()
     public static let isLandscapeDevice: Bool = {
-        UIDeviceOrientationIsLandscape(UIDevice.current.orientation)
+        UIDevice.current.orientation.isLandscape
     }()
     public static let screenSize: CGSize = {
         UIScreen.main.bounds.size
